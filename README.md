@@ -109,6 +109,10 @@ A: There is no `setup.py` file, installer, or an official release. You
 install it by copying the code into your own project. `dataklasses.py` is
 small. You are encouraged to modify it to your own purposes.
 
+**Q: What versions of Python does it work with?**
+
+A: The code will work with versions 3.9 and later.
+
 **Q: But what if new features get added?**
 
 A: What new features?  The best new features are no new features. 
