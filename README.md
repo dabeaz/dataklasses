@@ -95,7 +95,7 @@ A: By default `__init__()`, `__repr__()`, and `__eq__()` methods are generated.
 A: No. The types are merely clues about what the value might be and
 the Python language does not provide any enforcement on its own. 
 
-**Q: Are they any additional features?**
+**Q: Are there any additional features?**
 
 A: No. You can either have features or you can have performance. Pick one.
 
