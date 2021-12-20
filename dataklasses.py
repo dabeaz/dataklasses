@@ -34,7 +34,7 @@ def codegen(func):
     return decorate
 
 def all_hints(cls):
-    return reduce(lambda x, y: x | getattr(y, '__annotations__',{}), reversed(cls.__mro__), {})
+    return reduce(lambda x, y: getattr(y, '__annotations__',{}) | x, cls.__mro__, {})
 
 @codegen
 def make__init__(fields):
