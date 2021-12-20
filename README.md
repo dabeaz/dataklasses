@@ -19,7 +19,7 @@ have to type out by hand:
 ```python
 >>> a = Coordinates(2, 3)
 >>> a
-Coordinates(2, y)
+Coordinates(2, 3)
 >>> a.x
 2
 >>> a.y
