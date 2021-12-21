@@ -75,7 +75,7 @@ def dataklass(cls):
     if not '__eq__' in clsdict: cls.__eq__ = make__eq__(fields)
     # if not '__iter__' in clsdict:  cls.__iter__ = make__iter__(fields)
     # if not '__hash__' in clsdict:  cls.__hash__ = make__hash__(fields)
-    cls.__match_args__ = fields
+    cls.__match_args__ = tuple(fields)
     return cls
 
 # Example use
