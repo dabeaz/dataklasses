@@ -123,9 +123,11 @@ A: If you're using it, you do. You maintain dataklasses.
 
 **Q: Is this actually a serious project?**
 
-A: It's best to think of dataklasses as more of an idea than a proper project.
+A: It's best to think of dataklasses as more of an idea than a project.
 There are many tools and libraries that perform some form of code generation.
-Dataklasses is a proof-of-concept for a different approach to that. 
+Dataklasses is a proof-of-concept for a different approach to that.  If you're
+a minimalist like me, you'll find it to be perfectly functional.  If you're
+looking for a lot of knobs to turn, you should probably move along.
 
 **Q: Who wrote this?**
 
