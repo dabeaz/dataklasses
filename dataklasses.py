@@ -22,17 +22,19 @@ def codegen(func):
         names = [ f'_{n}' for n in range(numfields) ]
         exec(func(names), globals(), d:={})
         return d.popitem()[1]
+    return make_func_code
 
-    def decorate(fields):
-        func = make_func_code(len(fields))
-        co_names = func.__code__.co_names
-        co_varnames = func.__code__.co_varnames
-        repl_co_names = (*co_names[:(start:=co_names.index('_0'))], *fields, *co_names[start+len(fields):])
-        repl_co_varnames = (*co_varnames[:(start:=co_varnames.index('_0'))], *fields, *co_varnames[start+len(fields):]) if '_0' in co_varnames else co_varnames
-        return type(func)(func.__code__.replace(co_names=repl_co_names, co_varnames=repl_co_varnames), func.__globals__)
+def patch_args_and_attributes(func, fields, start=0):
+    return type(func)(func.__code__.replace(
+        co_names=(*func.__code__.co_names[:start], *fields),
+        co_varnames=('self', *fields),
+    ), func.__globals__)
+
+def patch_attributes(func, fields, start=0):
+    return type(func)(func.__code__.replace(
+        co_names=(*func.__code__.co_names[:start], *fields)
+    ), func.__globals__)
     
-    return decorate
-
 def all_hints(cls):
     return reduce(lambda x, y: getattr(y, '__annotations__',{}) | x, cls.__mro__, {})
 
@@ -69,12 +71,13 @@ def make__hash__(fields):
 
 def dataklass(cls):
     fields = all_hints(cls)
+    nfields = len(fields)
     clsdict = vars(cls)
-    if not '__init__' in clsdict: cls.__init__ = make__init__(fields)
-    if not '__repr__' in clsdict: cls.__repr__ = make__repr__(fields)
-    if not '__eq__' in clsdict: cls.__eq__ = make__eq__(fields)
-    # if not '__iter__' in clsdict:  cls.__iter__ = make__iter__(fields)
-    # if not '__hash__' in clsdict:  cls.__hash__ = make__hash__(fields)
+    if not '__init__' in clsdict: cls.__init__ = patch_args_and_attributes(make__init__(nfields), fields)
+    if not '__repr__' in clsdict: cls.__repr__ = patch_attributes(make__repr__(nfields), fields, 2)
+    if not '__eq__' in clsdict: cls.__eq__ = patch_attributes(make__eq__(nfields), fields, 1)
+    # if not '__iter__' in clsdict:  cls.__iter__ = patch_attributes(make__iter__(nfields), fields)
+    # if not '__hash__' in clsdict:  cls.__hash__ = patch_attributes(make__hash__(nfields), fields, 1)
     cls.__match_args__ = tuple(fields)
     return cls
 
