@@ -80,7 +80,6 @@ def main(reps):
     write_perftemp(100, standard_template, '')
     run_test('standard classes', reps)
 
-    write_perftemp(100, namedtuple_template, 'from collections import namedtuple\n')
     write_perftemp(100, namedtuple_template, 'from typing import NamedTuple\n')
     run_test('namedtuple', reps)
 
