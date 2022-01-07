@@ -129,6 +129,11 @@ Dataklasses is a proof-of-concept for a different approach to that.  If you're
 a minimalist like me, you'll find it to be perfectly functional.  If you're
 looking for a lot of knobs to turn, you should probably move along.
 
+**Q: Should I give dataklasses a GitHub star?**
+
+A: Yes, because it will help me look superior to the other parents with
+kids in the middle-school robot club.
+
 **Q: Who wrote this?**
 
 A: `dataklasses` is the work of David Beazley. http://www.dabeaz.com.
